@@ -11,11 +11,18 @@
 <style>
 
 :root{
---bg:#0b0f14;
---card:#121821;
---accent:#00F0FF;
---accent2:#7B61FF;
---text:#e8f6ff;
+
+--bg:#0f0f10;
+--card:#18181b;
+
+--accent:#FE6F27;
+--accent-soft:#ffb089;
+
+--text:#f5f5f7;
+
+--grid:rgba(254,111,39,0.06);
+--glow:rgba(254,111,39,0.35);
+
 }
 
 *{
@@ -31,6 +38,7 @@ color:var(--text);
 overflow-x:hidden;
 }
 
+
 /* subtle grid background */
 
 body::before{
@@ -39,158 +47,345 @@ position:fixed;
 width:100%;
 height:100%;
 background:
-linear-gradient(rgba(0,240,255,0.05) 1px, transparent 1px),
-linear-gradient(90deg, rgba(0,240,255,0.05) 1px, transparent 1px);
-background-size:40px 40px;
+linear-gradient(var(--grid) 1px, transparent 1px),
+linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+
+background-size:42px 42px;
+
 z-index:-1;
 }
+
+
 
 /* welcome screen */
 
 .hero{
+
 height:100vh;
+
 display:flex;
+
 flex-direction:column;
+
 justify-content:center;
+
 align-items:center;
+
 text-align:center;
+
 padding:20px;
+
 }
+
+
 
 .glow-circle{
+
 width:120px;
+
 height:120px;
+
 border-radius:50%;
+
 border:2px solid var(--accent);
+
 box-shadow:
-0 0 15px var(--accent),
-0 0 40px rgba(0,240,255,0.3);
-animation:pulse 2s infinite;
+
+0 0 20px var(--glow),
+
+0 0 60px rgba(254,111,39,0.25);
+
+animation:pulse 2.2s infinite;
+
 margin-bottom:30px;
+
 }
+
+
 
 @keyframes pulse{
-0%{transform:scale(0.9); opacity:0.7;}
-50%{transform:scale(1.05); opacity:1;}
-100%{transform:scale(0.9); opacity:0.7;}
+
+0%{
+
+transform:scale(0.92);
+
+opacity:0.7;
+
 }
+
+
+
+50%{
+
+transform:scale(1.06);
+
+opacity:1;
+
+}
+
+
+
+100%{
+
+transform:scale(0.92);
+
+opacity:0.7;
+
+}
+
+}
+
+
 
 h1{
+
 font-family:Orbitron;
+
 font-weight:600;
+
 letter-spacing:2px;
+
 margin-bottom:10px;
+
+color:var(--text);
+
 }
+
+
 
 .enter-btn{
+
 margin-top:30px;
-padding:12px 26px;
-border-radius:30px;
+
+padding:13px 30px;
+
+border-radius:40px;
+
 border:1px solid var(--accent);
+
 background:transparent;
+
 color:var(--accent);
+
 font-family:Orbitron;
+
 letter-spacing:1px;
+
 cursor:pointer;
+
 transition:0.3s;
+
 }
 
+
+
 .enter-btn:hover{
+
 background:var(--accent);
+
 color:black;
-box-shadow:0 0 15px var(--accent);
+
+box-shadow:
+
+0 0 20px var(--glow),
+
+0 0 40px rgba(254,111,39,0.25);
+
 }
+
+
 
 /* team section */
 
 .section{
+
 min-height:100vh;
+
 padding:40px 18px;
+
 opacity:0;
+
 transform:translateY(40px);
+
 transition:0.7s;
+
 }
+
+
 
 .section.active{
+
 opacity:1;
+
 transform:translateY(0);
+
 }
+
+
 
 .section h2{
+
 font-family:Orbitron;
+
 text-align:center;
+
 margin-bottom:30px;
+
 letter-spacing:1px;
+
+color:var(--accent);
+
 }
+
+
+
+/* grid */
 
 .grid{
+
 display:grid;
+
 grid-template-columns:1fr 1fr;
+
 gap:14px;
+
 }
+
+
+
+/* cards */
 
 .card{
+
 background:var(--card);
-border-radius:16px;
+
+border-radius:18px;
+
 padding:10px;
+
 text-align:center;
+
 position:relative;
+
 overflow:hidden;
+
 border:1px solid rgba(255,255,255,0.05);
-transition:0.3s;
+
+transition:0.35s;
+
 }
+
+
 
 .card:active{
-transform:scale(0.97);
+
+transform:scale(0.96);
+
 }
+
+
 
 .card img{
+
 width:100%;
-border-radius:12px;
+
+border-radius:14px;
+
 margin-bottom:8px;
+
 }
+
+
 
 .name{
+
 font-size:13px;
-opacity:0.8;
+
+opacity:0.85;
+
+color:var(--accent-soft);
+
+letter-spacing:0.4px;
+
 }
+
+
+
+/* message overlay */
 
 .message{
+
 position:absolute;
+
 top:0;
+
 left:0;
+
 width:100%;
+
 height:100%;
-background:rgba(11,15,20,0.95);
+
+background:rgba(15,15,16,0.96);
+
 display:flex;
+
 justify-content:center;
+
 align-items:center;
+
 padding:18px;
+
 text-align:center;
+
 font-size:14px;
+
 opacity:0;
+
 pointer-events:none;
+
 transition:0.35s;
+
+line-height:1.6;
+
+color:#ffd7bf;
+
 }
+
+
+
+/* active state */
 
 .card.active .message{
+
 opacity:1;
+
 pointer-events:auto;
+
 }
 
+
+
+/* glow style */
+
 .glow{
+
 box-shadow:
-0 0 12px rgba(0,240,255,0.4),
-0 0 30px rgba(123,97,255,0.2);
+
+0 0 18px rgba(254,111,39,0.18),
+
+0 0 35px rgba(254,111,39,0.12);
+
 }
 
 </style>
 
 </head>
 
+
+
 <body>
 
-<!-- welcome -->
+
 
 <section class="hero">
 
@@ -198,127 +393,222 @@ box-shadow:
 
 <h1 id="title">Initializing...</h1>
 
-<button class="enter-btn" onclick="enterSite()">ENTER</button>
+<button class="enter-btn" onclick="enterSite()">
+
+ENTER
+
+</button>
 
 </section>
 
 
-<!-- team -->
 
 <section class="section" id="team">
 
 <h2>Messages from your team</h2>
 
+
+
 <div class="grid">
 
-<!-- card -->
+
 
 <div class="card glow" onclick="toggleCard(this)">
+
 <img src="https://via.placeholder.com/300">
+
 <div class="name">Alex</div>
+
 <div class="message">
+
 Your precision inspires excellence.
-</div>
+
 </div>
 
+</div>
+
+
+
 <div class="card glow" onclick="toggleCard(this)">
+
 <img src="https://via.placeholder.com/300">
+
 <div class="name">Priya</div>
+
 <div class="message">
+
 Working with you upgrades our system.
-</div>
+
 </div>
 
+</div>
+
+
+
 <div class="card glow" onclick="toggleCard(this)">
+
 <img src="https://via.placeholder.com/300">
+
 <div class="name">Rahul</div>
+
 <div class="message">
+
 Your curiosity drives innovation.
-</div>
+
 </div>
 
+</div>
+
+
+
 <div class="card glow" onclick="toggleCard(this)">
+
 <img src="https://via.placeholder.com/300">
+
 <div class="name">Neha</div>
+
 <div class="message">
+
 You make the impossible executable.
-</div>
+
 </div>
 
+</div>
+
+
+
 <div class="card glow" onclick="toggleCard(this)">
+
 <img src="https://via.placeholder.com/300">
+
 <div class="name">Vikram</div>
+
 <div class="message">
+
 Systems improve when you're involved.
-</div>
+
 </div>
 
+</div>
+
+
+
 <div class="card glow" onclick="toggleCard(this)">
+
 <img src="https://via.placeholder.com/300">
+
 <div class="name">Sara</div>
+
 <div class="message">
+
 Your logic strengthens our framework.
+
 </div>
+
 </div>
+
+
 
 </div>
 
 </section>
 
 
+
 <script>
 
-/* typing intro */
+
 
 let text = "Happy Birthday Mr. Ravi";
+
 let i = 0;
+
+
 
 setTimeout(() => {
 
+
+
 function typing(){
+
 if(i < text.length){
+
 document.getElementById("title").innerHTML += text.charAt(i);
+
 i++;
-setTimeout(typing,60);
+
+setTimeout(typing,55);
+
 }
+
 }
+
+
 
 document.getElementById("title").innerHTML="";
+
 typing();
 
-},1000);
 
 
-/* enter transition */
+},900);
+
+
+
+
 
 function enterSite(){
 
+
+
 document.getElementById("team").classList.add("active");
 
+
+
 window.scrollTo({
+
 top:window.innerHeight,
+
 behavior:"smooth"
+
 })
+
+
 
 }
 
 
-/* card interaction */
+
+
 
 function toggleCard(card){
 
+
+
 document.querySelectorAll(".card").forEach(c=>{
+
 if(c!==card){
+
 c.classList.remove("active")
+
 }
+
 })
+
+
 
 card.classList.toggle("active")
 
+
+
 }
+
+
 
 </script>
 
 
+
 </body>
+
 </html>
