@@ -39,25 +39,34 @@ overflow-x:hidden;
 }
 
 
-/* subtle grid background */
+
+/* background grid */
 
 body::before{
+
 content:"";
+
 position:fixed;
+
 width:100%;
+
 height:100%;
+
 background:
+
 linear-gradient(var(--grid) 1px, transparent 1px),
+
 linear-gradient(90deg, var(--grid) 1px, transparent 1px);
 
 background-size:42px 42px;
 
 z-index:-1;
+
 }
 
 
 
-/* welcome screen */
+/* hero */
 
 .hero{
 
@@ -105,33 +114,11 @@ margin-bottom:30px;
 
 @keyframes pulse{
 
-0%{
+0%{transform:scale(0.92); opacity:0.7;}
 
-transform:scale(0.92);
+50%{transform:scale(1.06); opacity:1;}
 
-opacity:0.7;
-
-}
-
-
-
-50%{
-
-transform:scale(1.06);
-
-opacity:1;
-
-}
-
-
-
-100%{
-
-transform:scale(0.92);
-
-opacity:0.7;
-
-}
+100%{transform:scale(0.92); opacity:0.7;}
 
 }
 
@@ -146,8 +133,6 @@ font-weight:600;
 letter-spacing:2px;
 
 margin-bottom:10px;
-
-color:var(--text);
 
 }
 
@@ -195,7 +180,7 @@ box-shadow:
 
 
 
-/* team section */
+/* section */
 
 .section{
 
@@ -253,7 +238,7 @@ gap:14px;
 
 
 
-/* cards */
+/* card */
 
 .card{
 
@@ -353,8 +338,6 @@ color:#ffd7bf;
 
 
 
-/* active state */
-
 .card.active .message{
 
 opacity:1;
@@ -365,8 +348,6 @@ pointer-events:auto;
 
 
 
-/* glow style */
-
 .glow{
 
 box-shadow:
@@ -374,6 +355,40 @@ box-shadow:
 0 0 18px rgba(254,111,39,0.18),
 
 0 0 35px rgba(254,111,39,0.12);
+
+}
+
+
+
+/* confetti */
+
+.confetti{
+
+position:fixed;
+
+width:8px;
+
+height:8px;
+
+top:-10px;
+
+border-radius:2px;
+
+animation:fall linear forwards;
+
+}
+
+
+
+@keyframes fall{
+
+to{
+
+transform:translateY(110vh) rotate(360deg);
+
+opacity:0;
+
+}
 
 }
 
@@ -405,7 +420,7 @@ ENTER
 
 <section class="section" id="team">
 
-<h2>Messages from your team</h2>
+<h2>System Messages</h2>
 
 
 
@@ -421,7 +436,7 @@ ENTER
 
 <div class="message">
 
-Your precision inspires excellence.
+Performance consistently exceeds expected parameters.
 
 </div>
 
@@ -437,7 +452,7 @@ Your precision inspires excellence.
 
 <div class="message">
 
-Working with you upgrades our system.
+Collaboration efficiency increased by your presence.
 
 </div>
 
@@ -453,7 +468,7 @@ Working with you upgrades our system.
 
 <div class="message">
 
-Your curiosity drives innovation.
+Innovation module activated through your curiosity.
 
 </div>
 
@@ -469,7 +484,7 @@ Your curiosity drives innovation.
 
 <div class="message">
 
-You make the impossible executable.
+Complex challenges converted into executable outcomes.
 
 </div>
 
@@ -485,7 +500,7 @@ You make the impossible executable.
 
 <div class="message">
 
-Systems improve when you're involved.
+System stability improves when you are deployed.
 
 </div>
 
@@ -501,7 +516,7 @@ Systems improve when you're involved.
 
 <div class="message">
 
-Your logic strengthens our framework.
+Logical precision enhances team intelligence.
 
 </div>
 
@@ -575,6 +590,10 @@ behavior:"smooth"
 
 
 
+launchConfetti()
+
+
+
 }
 
 
@@ -598,6 +617,66 @@ c.classList.remove("active")
 
 
 card.classList.toggle("active")
+
+
+
+}
+
+
+
+/* orange confetti */
+
+function launchConfetti(){
+
+
+
+const colors=[
+
+"#FE6F27",
+
+"#ff8a50",
+
+"#ffb089",
+
+"#ffd1b8"
+
+]
+
+
+
+for(let i=0;i<50;i++){
+
+
+
+let conf=document.createElement("div")
+
+conf.className="confetti"
+
+
+
+conf.style.left=Math.random()*100+"vw"
+
+conf.style.background=
+
+colors[Math.floor(Math.random()*colors.length)]
+
+
+
+conf.style.animationDuration=
+
+2+Math.random()*2+"s"
+
+
+
+document.body.appendChild(conf)
+
+
+
+setTimeout(()=>conf.remove(),4000)
+
+
+
+}
 
 
 
